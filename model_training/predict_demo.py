@@ -1,11 +1,11 @@
 import joblib
 import pandas as pd
 
-# Загрузка моделей
+# Load models
 clf = joblib.load('models/catboost_classifier.pkl')
 reg = joblib.load('models/catboost_regressor.pkl')
 
-# Пример ввода данных (можно заменить на input() для интерактива)
+# Example input data (can be replaced with input() for interactive use)
 new_project = pd.DataFrame([{
     'domain': 'web_development',
     'client_type': 'large_corporate',
@@ -18,9 +18,9 @@ new_project = pd.DataFrame([{
     'risk_skill_gap': False
 }])
 
-# Предсказания
-prob_delay = clf.predict_proba(new_project)[0, 1]  # вероятность срыва
+# Predictions
+prob_delay = clf.predict_proba(new_project)[0, 1]  # probability of delay
 pred_delay_percent = reg.predict(new_project)[0]
 
-print(f"Вероятность срыва срока: {prob_delay:.2%}")
-print(f"Прогнозируемая задержка: {pred_delay_percent:.2f}%")
+print(f"Probability of schedule delay: {prob_delay:.2%}")
+print(f"Predicted delay: {pred_delay_percent:.2f}%")
