@@ -95,8 +95,8 @@ def calculate_actual_duration(row):
     # TZ quality: exponential effect
     tz_impact = np.exp(-row['tz_quality'] * 2) * 0.35 - 0.05
 
-    # Stakeholder involvement: logistic effect
-    stakeholder_impact = (1 / (1 + np.exp(8 * (0.5 - row['stakeholder_involvement']))) - 0.5) * 0.25
+    # Stakeholder involvement: logistic effect (higher involvement = lower risk)
+    stakeholder_impact = (0.5 - 1 / (1 + np.exp(8 * (0.5 - row['stakeholder_involvement'])))) * 0.25
 
     # Skill gap: amplifies other risks
     skill_gap_impact = 0.08 if row['risk_skill_gap'] else 0
